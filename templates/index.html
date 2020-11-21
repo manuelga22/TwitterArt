@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Twitter Art</title>
+        <script src="../static/front-end/libraries/jquery/jquery.js"></script>
+        <link rel="stylesheet" href="../static/front-end/index.css">
+
+    </head>
+    <body>
+
+        <div class="main">
+
+
+            <div id="canvas-wrapper"></div>
+
+            <div class="tools">
+                <div id="pencilBtn">
+                    <button class="btn">Pencil</button>
+                </div>
+                <div id="brushBtn">
+                    <button class="btn">Brush</button>
+                </div>
+                <div id="eraserBtn">
+                    <button class="btn">Eraser</button>
+                </div>
+                <div>
+                    <label for="colorInput">Color:</label>
+                    <input type="color" id="colorInput"/>
+                </div>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="100" value="30" class="slider" id="strokeWeightInput">
+                </div>
+                <div id="resetBtn">
+                    <button class="btn">Reset</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class ="twitterStuff">
+          <div> <input class="btn" type="file" id="imageInput" multiple accept='image/*|video/*'></div>       
+          <div><button id="saveBtn" class="btn">Save</button></div>
+          <div><button id="tweetBtn"class="btn">Tweet</button></div>
+        </div>
+
+
+    </body>
+    <script src="../static/js/tool.js"></script>
+    <script src="../static/js/brush.js"></script>
+    <script src="../static/js/eraser.js"></script>
+    <script src="../static/js/pencil.js"></script>
+
+    <script src="../static/front-end/libraries/p5/p5.js"></script>
+    <script src="../static/front-end/libraries/p5/addons/p5.sound.js"></script>
+    <script src="../static/front-end/libraries/axios/dist/axios.min.js"></script>
+    <script src="../static/front-end/main.js"></script>
+    
+</html>

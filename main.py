@@ -52,7 +52,7 @@ def tweet():
 
 @app.route('/')
 def upload_form():
-    return render_template('upload.html')
+    return render_template('index.html')
 
 
 @app.route('/', methods=['POST'])
