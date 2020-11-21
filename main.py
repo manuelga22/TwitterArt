@@ -10,6 +10,16 @@ import sys
 from PIL import Image
 # from deepface import DeepFace
 
+#importing all dependencies
+import numpy as np
+import tweepy
+
+#variables for accessing twitter API
+consumer_key='swzpmLwhOjAicnxkK0B85jot5'
+consumer_secret_key='HHTb1U7x1VaQtOla5MLftHfaZLscNsM8udAvJWoWGbuogMA4Lb'
+access_token='1054798969447034880-U5regDkOohLSybJ3qVedUsctrGdjTQ'
+access_token_secret='TQv7TGscDUrkglpSYwE0eXWgT6Gy7faC06He4yNQu1D2V'
+
 
 
 def compressMe(folder, file):
@@ -26,6 +36,18 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/tweet')
+def tweet():
+    data = request.form
+    auth=tweepy.OAuthHandler(consumer_key,consumer_secret_key)
+    auth.set_access_token(access_token,access_token_secret)
+    api=tweepy.API(auth)
+    tweet_text = input("text")
+    image_path = input("path of image")
+    status = api.update_with_media(image_path, tweet_text)
+
+
 
 
 @app.route('/')
