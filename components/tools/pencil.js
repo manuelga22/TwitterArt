@@ -4,7 +4,6 @@ class Pencil extends Tool{
        this.color = color;
     }
     getColor=()=>{
-        console.log(this.color)
         return this.color;
      }
     setColor=(newColor)=>{

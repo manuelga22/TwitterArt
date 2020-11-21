@@ -12,7 +12,7 @@ body{
    padding:1em;
    border:solid 2px #1DA1F2;
    border-radius: 50px;
-   min-height: 70vh;
+   min-height: 60vh;
    box-shadow:  5px 10px #888888;
 }
 .main > div{
@@ -21,6 +21,7 @@ body{
 #canvas-wrapper{
 
     order:2;
+    /* box-shadow: 5px 10px 18px #888888; */
 }
 .tools{
     display:flex;
@@ -47,3 +48,20 @@ body{
     border-radius: 20px;
     width:80px;
 }
+.twitterStuff{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    
+}
+.twitterStuff>*{
+    margin:10px;
+}
+.twitterStuff>.btn{
+    margin:10px;
+    font-size: 30px !important;
+    
+}
+
+
