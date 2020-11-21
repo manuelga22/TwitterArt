@@ -77,7 +77,7 @@ def style_image():
             # filename=os.path.join(app.config['UPLOAD_FOLDER'], "Style_Mosaic_" +filename)
 
 
-            response = requests.post(url, files=files)
+            response = requests.post(url, files=files,verify=False)
 
             if response.status_code == 200:
                 with open(os.path.join(app.config['UPLOAD_FOLDER'], "Style_Mosaic_" + filename), 'wb') as f:
@@ -94,7 +94,7 @@ def style_image():
                 return render_template('show_image.html', filename=os.path.join(app.config['UPLOAD_FOLDER'], "Style_udnie_" +filename))
 
             # print("Hello")
-            response = requests.post(url, files=files)
+            response = requests.post(url, files=files,verify=False)
 
             if response.status_code == 200:
                 with open(os.path.join(app.config['UPLOAD_FOLDER'], "Style_udnie_" + filename), 'wb') as f:
@@ -110,7 +110,7 @@ def style_image():
             if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'], "Style_candy_" + filename)):
                 return render_template('show_image.html',  filename=os.path.join(app.config['UPLOAD_FOLDER'], "Style_candy_" +filename))
 
-            response = requests.post(url, files=files)
+            response = requests.post(url, files=files,verify=False)
 
             if response.status_code == 200:
                 with open(os.path.join(app.config['UPLOAD_FOLDER'], "Style_candy_" + filename), 'wb') as f:
@@ -126,7 +126,7 @@ def style_image():
             if os.path.isfile(os.path.join(app.config['UPLOAD_FOLDER'], "Style_rain_princess_" + filename)):
                 return render_template('show_image.html',  filename=os.path.join(app.config['UPLOAD_FOLDER'], "Style_rain_princess_" +filename))
 
-            response = requests.post(url, files=files)
+            response = requests.post(url, files=files,verify=False)
 
             if response.status_code == 200:
                 with open(os.path.join(app.config['UPLOAD_FOLDER'], "Style_rain_princess_" + filename), 'wb') as f:
