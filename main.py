@@ -8,7 +8,7 @@ import requests
 import os
 import sys
 from PIL import Image
-from deepface import DeepFace
+# from deepface import DeepFace
 
 
 
@@ -133,22 +133,22 @@ def style_image():
                     f.write(response.content)
 
                 return render_template('show_image.html',  filename=os.path.join(app.config['UPLOAD_FOLDER'], "Style_rain_princess_" +filename) )
-        else:
-            try:
-                # print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                obj = DeepFace.analyze(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-                print(obj)
-                obj['age']=int(obj['age'])
+        # else:
+        #     try:
+        #         # print(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #         # obj = DeepFace.analyze(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        #         # print(obj)
+        #         # obj['age']=int(obj['age'])
 
-                # print(filename)
+        #         # print(filename)
 
-                return render_template('show_image.html', age=obj['age'],dominant_emotion=obj['dominant_emotion'],dominant_race=obj['dominant_race'],gender=obj['gender'],filename=os.path.join(app.config['UPLOAD_FOLDER'],  filename))
+        #         return render_template('show_image.html', age=obj['age'],dominant_emotion=obj['dominant_emotion'],dominant_race=obj['dominant_race'],gender=obj['gender'],filename=os.path.join(app.config['UPLOAD_FOLDER'],  filename))
 
 
 
-            except Exception as e:
-                print("In except ")
-                print(e)
+            # except Exception as e:
+            #     print("In except ")
+            #     print(e)
 
 
         return render_template('show_image.html', filename=os.path.join(app.config['UPLOAD_FOLDER'], filename))
