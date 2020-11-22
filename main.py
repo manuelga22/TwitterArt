@@ -10,6 +10,20 @@ import sys
 from PIL import Image
 from deepface import DeepFace
 
+import numpy as np
+import tweepy
+
+#variables for accessing twitter API
+consumer_key='XXXXXXXXXXXXXXXXXXXXXXXXXX'
+consumer_secret_key='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+access_token='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+access_token_secret='XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
+auth=tweepy.OAuthHandler(consumer_key,consumer_secret_key)
+auth.set_access_token(access_token,access_token_secret)
+api=tweepy.API(auth)
+
+tweet_text="My Auto Tweet for #CodeChella"
 
 
 def compressMe(folder, file):
@@ -51,6 +65,16 @@ def upload_image():
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
+
+@app.route("/post_to_twitter/<path:filename>")
+def post_to_twitter(filename):
+    status = api.update_with_media(filename, tweet_text)
+    print(status)
+    return render_template('upload.html', filename= filename)
+
+
+
+
 
 @app.route('/style', methods=['POST'])
 def style_image():
@@ -160,6 +184,7 @@ def style_image():
     # do something
 
 
+
 @app.route('/display/<filename>')
 def display_image(filename):
     # print('display_image filename: ' + filename)
@@ -167,6 +192,6 @@ def display_image(filename):
 
 
 if __name__ == "__main__":
-    app.run(debug=True,use_reloader=False)
+    # app.run(debug=True,use_reloader=False)
 
-    # app.run(debug=True)
+    app.run(debug=True)

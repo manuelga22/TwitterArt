@@ -1,7 +1,7 @@
 
 from deepface import DeepFace
 
-obj = DeepFace.analyze(r"static\uploads\sai_1.jpg")
+obj = DeepFace.analyze(r"static\uploads\sai_3.jpg")
 
 print(type(obj))
 #objs = DeepFace.analyze(["img1.jpg", "img2.jpg", "img3.jpg"]) #analyzing multiple faces same time

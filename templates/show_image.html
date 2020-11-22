@@ -40,6 +40,17 @@
 
 
 
+
+
+
 <button onclick="window.location.href='http://localhost:5000/';">
     Go Back
 </button>
+
+{% if filename %}
+
+<button onclick="window.location.href='http://localhost:5000/post_to_twitter/{{filename}}';">
+    Post To Twitter
+</button>
+
+{% endif %}
