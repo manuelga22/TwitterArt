@@ -1,0 +1,67 @@
+body{
+    background: #E1E8ED;
+}
+.main{
+   display:flex;
+   justify-content: center;
+   flex-wrap: wrap;
+  /* flex-direction: column; */
+   align-items: center;
+   background:#1DA1F2;
+   margin:5em;
+   padding:1em;
+   border:solid 2px #1DA1F2;
+   border-radius: 50px;
+   min-height: 60vh;
+   box-shadow:  5px 10px #888888;
+}
+.main > div{
+    margin:2em;
+}
+#canvas-wrapper{
+
+    order:2;
+    /* box-shadow: 5px 10px 18px #888888; */
+}
+.tools{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    order:1;
+    flex-direction: column;
+    background:white;
+    min-height:200px;
+    width:180px;
+    border:solid black 10px;
+    border-radius: 30px;
+}
+.tools>div{
+    margin: 10px;
+    text-align: center;
+    
+}
+.btn{
+    background:#00308F;
+    padding:5px;
+    border:solid 2px #00308F;
+    color:white;
+    border-radius: 20px;
+    width:80px;
+}
+.twitterStuff{
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: center;
+    
+}
+.twitterStuff>*{
+    margin:10px;
+}
+.twitterStuff>.btn{
+    margin:10px;
+    font-size: 30px !important;
+    
+}
+
+
