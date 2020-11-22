@@ -14,10 +14,9 @@ from PIL import Image
 import numpy as np
 import tweepy 
 import pandas as pd
-from binascii import a2b_base64
 from flask_cors import CORS
-
-
+import  io, base64
+from os import environ 
 
 #app = Flask(__name__)
 CORS(app)
@@ -26,6 +25,8 @@ consumer_key='swzpmLwhOjAicnxkK0B85jot5'
 consumer_secret_key='HHTb1U7x1VaQtOla5MLftHfaZLscNsM8udAvJWoWGbuogMA4Lb'
 access_token='1054798969447034880-U5regDkOohLSybJ3qVedUsctrGdjTQ'
 access_token_secret='TQv7TGscDUrkglpSYwE0eXWgT6Gy7faC06He4yNQu1D2V'
+
+
 
 #CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -186,11 +187,10 @@ def display_image(filename):
 
 @app.route('/tweet', methods=['POST'])
 def tweet():
-    print(request.form.picture) # request.form.picture contains the DATA URL of the image
-    binary_data = a2b_base64(data)
-    # fd = open('image.jpeg', 'wb')  # I don't know if this works
-    # fd.write(binary_data)
-    # fd.close()
+    data= request.form['picture']
+    im = Image.open(io.BytesIO(base64.b64decode(data.split(',')[1])))
+    filename = "newPicture.jpeg"
+    im.save("static/uploads/"+filename)
     twitter_auth_keys = { 
         "consumer_key"        : consumer_key,
         "consumer_secret"     : consumer_secret_key,
@@ -206,10 +206,9 @@ def tweet():
             twitter_auth_keys['access_token_secret']
             )
     api = tweepy.API(auth)
-
     #the image needs to be stored and the path has to be here! 
-    media = api.media_upload("./static/style-images/candy.jpg")
-    tweet = "TEST #Codechella"
+    media = api.media_upload("./static/uploads/"+filename)
+    tweet = "THANK YOU CODECHELLA #Codechella"
     post_result = api.update_status(status=tweet, media_ids=[media.media_id])
 
 
