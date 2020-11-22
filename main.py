@@ -12,15 +12,22 @@ from PIL import Image
 
 #importing all dependencies
 import numpy as np
-import tweepy
+import tweepy 
+import pandas as pd
+from binascii import a2b_base64
+from flask_cors import CORS
 
+
+
+#app = Flask(__name__)
+CORS(app)
 #variables for accessing twitter API
 consumer_key='swzpmLwhOjAicnxkK0B85jot5'
 consumer_secret_key='HHTb1U7x1VaQtOla5MLftHfaZLscNsM8udAvJWoWGbuogMA4Lb'
 access_token='1054798969447034880-U5regDkOohLSybJ3qVedUsctrGdjTQ'
 access_token_secret='TQv7TGscDUrkglpSYwE0eXWgT6Gy7faC06He4yNQu1D2V'
 
-
+#CORS(app, resources={r"/*": {"origins": "*"}})
 
 def compressMe(folder, file):
     picture = Image.open(os.path.join(app.config['UPLOAD_FOLDER'], file))
@@ -36,17 +43,6 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/tweet')
-def tweet():
-    data = request.form
-    auth=tweepy.OAuthHandler(consumer_key,consumer_secret_key)
-    auth.set_access_token(access_token,access_token_secret)
-    api=tweepy.API(auth)
-    tweet_text = input("text")
-    image_path = input("path of image")
-    status = api.update_with_media(image_path, tweet_text)
-
 
 
 
@@ -69,7 +65,7 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         # print('upload_image filename: ' + filename)
         flash('Image successfully uploaded and displayed')
-        return render_template('upload.html', filename=os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return render_template('index.html', filename=os.path.join(app.config['UPLOAD_FOLDER'], filename))
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
@@ -186,6 +182,35 @@ def style_image():
 def display_image(filename):
     # print('display_image filename: ' + filename)
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
+
+
+@app.route('/tweet', methods=['POST'])
+def tweet():
+    print(request.form.picture) # request.form.picture contains the DATA URL of the image
+    binary_data = a2b_base64(data)
+    # fd = open('image.jpeg', 'wb')  # I don't know if this works
+    # fd.write(binary_data)
+    # fd.close()
+    twitter_auth_keys = { 
+        "consumer_key"        : consumer_key,
+        "consumer_secret"     : consumer_secret_key,
+        "access_token"        : access_token,
+        "access_token_secret" : access_token_secret
+    }
+    auth = tweepy.OAuthHandler(
+            twitter_auth_keys['consumer_key'],
+            twitter_auth_keys['consumer_secret']
+            )
+    auth.set_access_token(
+            twitter_auth_keys['access_token'],
+            twitter_auth_keys['access_token_secret']
+            )
+    api = tweepy.API(auth)
+
+    #the image needs to be stored and the path has to be here! 
+    media = api.media_upload("./static/style-images/candy.jpg")
+    tweet = "TEST #Codechella"
+    post_result = api.update_status(status=tweet, media_ids=[media.media_id])
 
 
 if __name__ == "__main__":

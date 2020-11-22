@@ -1,6 +1,6 @@
 {% if filename %}
 <div>
-    <img src="{{ filename }}"  width="200" height="200" >
+    <img src="{{ filename }}"  width="200" height="200" id="imageWithFilter" >
 </div>
 {% endif %}
 
@@ -37,9 +37,42 @@
 {% endif %}
 
 
-
+<div>
+    <form method ="POST" >
+          <button  id="tweetBtn2"class="btn">Tweet</button>
+    </form>
+</div>
 
 
 <button onclick="window.location.href='http://localhost:5000/';">
     Go Back
 </button>
+<script src="../static/front-end/libraries/jquery/jquery.js"></script>
+<script>
+  $("#tweetBtn2").on("click",function(){
+      let image = document.getElementById("imageWithFilter")
+
+      $.ajax({
+        type:'POST',
+        url:'/tweet',
+        data:{'picture':image},
+        success: function(data){
+          alert("succesful request",data);
+        }
+      })
+
+  })
+
+</script>
+
+
+
+<script src="../static/js/tool.js"></script>
+<script src="../static/js/brush.js"></script>
+<script src="../static/js/eraser.js"></script>
+<script src="../static/js/pencil.js"></script>
+<script src="../static/front-end/libraries/p5/p5.js"></script>
+<script src="../static/front-end/libraries/p5/addons/p5.sound.js"></script>
+<script src="../static/front-end/libraries/axios/dist/axios.min.js"></script>
+<script src="../static/front-end/libraries/dom-to-image/src/dom-to-image.js"></script>
+<script src="../static/front-end/main.js"></script>
